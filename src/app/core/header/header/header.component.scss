@@ -1,0 +1,17 @@
+.menu {
+  background: #1f2d3d;
+  color: white;
+  padding: 27px;
+  display: flex;
+  align-items: center;
+
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    mat-icon {
+      font-size: 24px;
+    }
+  }
+}
