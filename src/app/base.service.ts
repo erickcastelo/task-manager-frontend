@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 export class BaseService<T> {
   private hostname = 'http://localhost';
-  private port = 3000;
+  private port = 8080;
   protected fullUrl = '';
   protected headers = new HttpHeaders();
   protected parameters: HttpParams = new HttpParams();

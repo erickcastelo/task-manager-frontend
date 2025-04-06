@@ -1,20 +1,40 @@
-<form class="content-form">
+<form [formGroup]="taskForm" (ngSubmit)="onSubmitForm()" class="content-form">
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Título</mat-label>
-    <input matInput placeholder="Título" />
+    <input matInput placeholder="Título" formControlName="title" />
+    <mat-error *ngIf="taskForm.get('title')?.hasError('required')">
+      Título é obrigatório
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Descrição</mat-label>
-    <input matInput placeholder="Descrição" />
+    <input matInput placeholder="Descrição" formControlName="description" />
+    <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
+      Descrição é obrigatório
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
-    <mat-label>Favorite food</mat-label>
-    <mat-select>
-      @for (food of foods; track food) {
-      <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      @for (taskOption of taskOptions; track taskOption) {
+      <mat-option [value]="taskOption.value">{{ taskOption.label }}</mat-option>
       }
     </mat-select>
+    <mat-error *ngIf="taskForm.get('status')?.hasError('required')">
+      Status é obrigatório
+    </mat-error>
   </mat-form-field>
 
-  <button mat-flat-button>Basic</button>
+  <mat-form-field appearance="outline">
+    <mat-label>Prazo de conclusão</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dueAt" />
+    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="taskForm.get('dueAt')?.hasError('required')">
+      Data é obrigatória
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button>SALVAR</button>
 </form>
