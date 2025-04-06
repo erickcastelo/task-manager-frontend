@@ -6,7 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet, HeaderComponent, SidebarComponent, MatSidenavModule],
+  imports: [HeaderComponent, SidebarComponent, MatSidenavModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

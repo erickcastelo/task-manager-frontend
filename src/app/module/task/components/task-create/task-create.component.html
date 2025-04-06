@@ -1,0 +1,20 @@
+<form class="content-form">
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Título</mat-label>
+    <input matInput placeholder="Título" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Descrição</mat-label>
+    <input matInput placeholder="Descrição" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Favorite food</mat-label>
+    <mat-select>
+      @for (food of foods; track food) {
+      <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-flat-button>Basic</button>
+</form>
