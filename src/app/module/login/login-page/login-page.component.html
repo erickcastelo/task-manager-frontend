@@ -1,1 +1,92 @@
-<p>login-page works!</p>
+<mat-tab-group>
+  <mat-tab label="Login">
+    <form class="form-container">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" name="email" ngModel required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" name="password" ngModel required />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" class="full-width">
+        Entrar
+      </button>
+    </form>
+  </mat-tab>
+
+  <mat-tab label="Cadastro">
+    <form
+      class="form-container"
+      [formGroup]="createUserForm"
+      (ngSubmit)="onSubmitCreateUserForm()"
+    >
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input
+          matInput
+          type="text"
+          name="name"
+          formControlName="name"
+          required
+        />
+        <mat-error *ngIf="createUserForm.get('name')?.hasError('required')">
+          Name é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          name="email"
+          formControlName="email"
+          required
+        />
+        <mat-error *ngIf="createUserForm.get('email')?.hasError('required')">
+          Email é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Senha</mat-label>
+        <input
+          matInput
+          type="password"
+          name="password"
+          formControlName="password"
+          required
+        />
+        <mat-error *ngIf="createUserForm.get('password')?.hasError('required')">
+          Senha é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Confirmar senha</mat-label>
+        <input
+          matInput
+          type="password"
+          name="confirmPassword"
+          formControlName="confirmPassword"
+          required
+        />
+        <mat-error
+          *ngIf="createUserForm.get('confirmPassword')?.hasError('required')"
+        >
+          Confirma senha é obrigatório
+        </mat-error>
+        <mat-error *ngIf="createUserForm.errors?.['passwordsMismatch']">
+          As senhas não coincidem.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" class="full-width">
+        Cadastrar
+      </button>
+    </form>
+  </mat-tab>
+</mat-tab-group>
