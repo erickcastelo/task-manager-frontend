@@ -1,3 +1,6 @@
 <div>
-  <app-task-create (onSubmit)="createTask($event)"></app-task-create>
+  <app-task-create
+    (onSubmit)="beforeSave($event)"
+    [taskId]="taskId"
+  ></app-task-create>
 </div>

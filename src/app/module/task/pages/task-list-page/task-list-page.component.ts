@@ -34,6 +34,8 @@ export class TaskListPageComponent implements OnInit {
     'description',
     'status',
     'dueAt',
+    'edit',
+    'delete',
   ];
 
   public data: Task[] = [];
@@ -70,5 +72,14 @@ export class TaskListPageComponent implements OnInit {
     this.sort = event.sort || '';
 
     this.listTasks();
+  }
+
+  public onEdit(task: Task) {
+    this.router.navigate(['task/edit', task.id]);
+  }
+
+  public onDelete(task: Task) {
+    // Lógica de exclusão
+    console.log('Excluindo task:', task);
   }
 }

@@ -25,7 +25,9 @@ export class TaskListComponent {
   @Input() public pageSize: number = 5;
   @Input() public displayedColumns: string[] = [];
 
-  @Output() onPageChange = new EventEmitter<PageEventCustom>();
+  @Output() public onPageChange = new EventEmitter<PageEventCustom>();
+  @Output() public onEdit = new EventEmitter<Task>();
+  @Output() public onDelete = new EventEmitter<Task>();
 
   sortDirection: 'asc' | 'desc' | '' = '';
 
@@ -50,5 +52,13 @@ export class TaskListComponent {
 
   public onPage(event: PageEvent): void {
     this.onPageChange.emit({ ...event, sort: this.sortDirection });
+  }
+
+  public edit(task: Task): void {
+    this.onEdit.emit(task);
+  }
+
+  public delete(task: Task): void {
+    this.onDelete.emit(task);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,7 +13,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { TaskService } from '../../service/task.service';
+import { Task } from '../../models/Task';
 
 interface TaskOption {
   value: string;
@@ -38,17 +40,41 @@ interface TaskOption {
 })
 export class TaskCreateComponent implements OnInit {
   @Output() onSubmit = new EventEmitter();
+  @Input() public taskId: string | null = null;
 
   public taskForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private taskService: TaskService
+  ) {}
 
   ngOnInit(): void {
-    this.taskForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      status: ['', Validators.required],
-      dueAt: [null, Validators.required],
+    if (this.taskId === null) {
+      this.taskForm = this.formBuilder.group({
+        title: ['', Validators.required],
+        description: ['', Validators.required],
+        status: ['', Validators.required],
+        dueAt: [null, Validators.required],
+      });
+    } else {
+      this.getById();
+    }
+  }
+
+  public getById(): void {
+    this.taskService.getById(Number(this.taskId)).subscribe({
+      next: (task: Task) => {
+        this.taskForm = this.formBuilder.group({
+          title: [task.title, null],
+          description: [task.description, null],
+          status: [task.status, null],
+          dueAt: [task.dueAt, null],
+        });
+      },
+      error: (error: Error) => {
+        console.log(error);
+      },
     });
   }
 

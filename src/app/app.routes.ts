@@ -16,6 +16,10 @@ export const routes: Routes = [
         path: 'create',
         component: TaskCreatePageComponent,
       },
+      {
+        path: 'edit/:id',
+        component: TaskCreatePageComponent,
+      },
     ],
   },
 ];
