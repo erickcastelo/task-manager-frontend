@@ -1,1 +1,9 @@
-<p>task-list-page works222!</p>
+<div class="task-list-page">
+  <app-task-list
+    [data]="data"
+    [totalItems]="totalItems"
+    [pageSize]="pageSize"
+    [displayedColumns]="displayedColumns"
+    (onPageChange)="onPageChange($event)"
+  ></app-task-list>
+</div>

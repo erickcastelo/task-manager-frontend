@@ -5,26 +5,24 @@ export class BaseService<T> {
   private port = 8080;
   protected fullUrl = '';
   protected headers = new HttpHeaders();
-  protected parameters: HttpParams = new HttpParams();
+  public parameters: HttpParams = new HttpParams();
 
   constructor(protected http: HttpClient, path: string) {
     this.fullUrl = `${this.hostname}:${this.port}/${path}`;
   }
 
   public addParameter(key: string, value: string): void {
-    this.parameters = this.parameters.append(key, value);
+    this.parameters = this.parameters.set(key, value);
   }
 
-  protected addOptions(parameters?: HttpParams): any {
-    const httpOptions = {} as HttpHeaders;
-
-    httpOptions['headers'] = this.headers;
-
+  public addOptions(parameters?: HttpParams) {
     if (parameters) {
-      // httpOptions.set('params', parameters);
+      return {
+        params: parameters,
+      };
     }
 
-    return httpOptions;
+    return {};
   }
 
   public getAll(): any {
