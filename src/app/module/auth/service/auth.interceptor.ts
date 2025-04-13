@@ -6,7 +6,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
   const token = cookieService.get('token');
 
-  if (token && !req.url.includes('/login')) {
+  const dontNeedToken = ['/auth/login', '/auth/me'];
+
+  if (token && !dontNeedToken.includes(req.url)) {
     const authReq = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,

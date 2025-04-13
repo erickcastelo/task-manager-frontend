@@ -10,6 +10,4 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
-  // @Input() isOpen = false;
-}
+export class SidebarComponent {}
