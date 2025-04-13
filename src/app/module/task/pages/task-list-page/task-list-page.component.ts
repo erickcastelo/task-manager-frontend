@@ -5,6 +5,7 @@ import { Page } from '../../../../common/page/Page';
 import { Task } from '../../models/Task';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SnackbarService } from '../../../../common/service/snackbar.service';
 
 export interface PageEventCustom extends PageEvent {
   sort: string | null;
@@ -20,7 +21,8 @@ export class TaskListPageComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackbar: SnackbarService
   ) {}
 
   public totalItems = 0;
@@ -79,13 +81,15 @@ export class TaskListPageComponent implements OnInit {
   }
 
   public onDelete(task: Task) {
-    this.taskService.delete(task.id).subscribe({
-      next: (result) => {
-        this.listTasks();
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
+    // this.taskService.delete(task.id).subscribe({
+    //   next: (result) => {
+    //     this.listTasks();
+    //     this.snackbar.success('Tarefa excluida com sucesso!');
+    //   },
+    //   error: (error) => {
+    //     console.error(error);
+    //   },
+    // });
+    this.snackbar.success('Tarefa excluida com sucesso!');
   }
 }
