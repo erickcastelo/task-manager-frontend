@@ -47,6 +47,10 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initilForms();
+  }
+
+  private initilForms(): void {
     this.createUserForm = this.formBuilder.group(
       {
         name: ['', Validators.required],

@@ -1,16 +1,16 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Page } from './common/page/Page';
+import { environment } from '../environments/environment';
 
 export class BaseService<T> {
-  private hostname = 'http://localhost';
-  private port = 8080;
+  private hostname = environment.apiUrl ?? 'http://localhost:8080';
   protected fullUrl = '';
   protected headers = new HttpHeaders();
   public parameters: HttpParams = new HttpParams();
 
   constructor(protected http: HttpClient, path: string) {
-    this.fullUrl = `${this.hostname}:${this.port}/${path}`;
+    this.fullUrl = `${this.hostname}/${path}`;
   }
 
   public addParameter(key: string, value: string): void {
