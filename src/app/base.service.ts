@@ -1,4 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Page } from './common/page/Page';
 
 export class BaseService<T> {
   private hostname = 'http://localhost';
@@ -25,23 +27,26 @@ export class BaseService<T> {
     return {};
   }
 
-  public getAll(): any {
-    return this.http.get<T>(this.fullUrl, this.addOptions(this.parameters));
+  public getAll(): Observable<Page<T>> {
+    return this.http.get<Page<T>>(
+      this.fullUrl,
+      this.addOptions(this.parameters)
+    );
   }
 
-  public getById(id: number): any {
+  public getById(id: number): Observable<T> {
     return this.http.get<T>(`${this.fullUrl}/${id}`);
   }
 
-  public create(data: T) {
+  public create(data: T): Observable<T> {
     return this.http.post<T>(this.fullUrl, data);
   }
 
-  public update(data: T, id: number | string) {
-    return this.http.put(`${this.fullUrl}/${id}`, data);
+  public update(data: T, id: number | string): Observable<T> {
+    return this.http.put<T>(`${this.fullUrl}/${id}`, data);
   }
 
-  public delete(id: number | string) {
-    return this.http.delete(`${this.fullUrl}/${id}`);
+  public delete(id: number | string): Observable<void> {
+    return this.http.delete<void>(`${this.fullUrl}/${id}`);
   }
 }

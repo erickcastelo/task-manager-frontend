@@ -1,14 +1,36 @@
 <mat-tab-group>
   <mat-tab label="Login">
-    <form class="form-container">
+    <form
+      class="form-container"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmitLoginForm()"
+    >
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
-        <input matInput type="email" name="email" ngModel required />
+        <input
+          matInput
+          type="email"
+          name="email"
+          formControlName="email"
+          required
+        />
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+          Email é obrigatório
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Senha</mat-label>
-        <input matInput type="password" name="password" ngModel required />
+        <input
+          matInput
+          type="password"
+          name="password"
+          formControlName="password"
+          required
+        />
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+          Password é obrigatório
+        </mat-error>
       </mat-form-field>
 
       <button mat-flat-button color="primary" type="submit" class="full-width">
@@ -17,7 +39,7 @@
     </form>
   </mat-tab>
 
-  <mat-tab label="Cadastro">
+  <mat-tab label="Cadastrar">
     <form
       class="form-container"
       [formGroup]="createUserForm"
