@@ -79,7 +79,13 @@ export class TaskListPageComponent implements OnInit {
   }
 
   public onDelete(task: Task) {
-    // Lógica de exclusão
-    console.log('Excluindo task:', task);
+    this.taskService.delete(task.id).subscribe({
+      next: (result) => {
+        this.listTasks();
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }

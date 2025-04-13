@@ -11,11 +11,7 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {
-  MatTabChangeEvent,
-  MatTabGroup,
-  MatTabsModule,
-} from '@angular/material/tabs';
+import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { UserService } from '../service/user.service';
 import { User } from '../models/User';
 import { Auth } from '../../auth/models/Auth';

@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { PageEventCustom } from '../../pages/task-list-page/task-list-page.component';
 import { StatusNamePipe } from '../../pipes/status-name.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfimDialogComponent } from '../../../../common/confim-dialog/confim-dialog.component';
 
 @Component({
   selector: 'app-task-list',
@@ -28,6 +30,8 @@ export class TaskListComponent {
   @Output() public onPageChange = new EventEmitter<PageEventCustom>();
   @Output() public onEdit = new EventEmitter<Task>();
   @Output() public onDelete = new EventEmitter<Task>();
+
+  constructor(private dialog: MatDialog) {}
 
   sortDirection: 'asc' | 'desc' | '' = '';
 
@@ -59,6 +63,20 @@ export class TaskListComponent {
   }
 
   public delete(task: Task): void {
-    this.onDelete.emit(task);
+    console.log('para paiu');
+
+    const dialogRef = this.dialog.open(ConfimDialogComponent, {
+      width: '300px',
+      data: {
+        title: 'Confirmação',
+        message: 'Tem certeza que deseja excluir esta tarefa?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.onDelete.emit(task);
+      }
+    });
   }
 }
