@@ -33,7 +33,7 @@ export class TaskCreatePageComponent implements OnInit {
   }
 
   private updateTask(task: Task): void {
-    this.taskService.update(task, Number(this.taskId)).subscribe({
+    this.taskService.update(task, this.taskId + '').subscribe({
       next: (result) => {
         if (result) {
           this.router.navigate(['task/list']);

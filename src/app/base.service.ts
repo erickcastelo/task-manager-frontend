@@ -34,7 +34,7 @@ export class BaseService<T> {
     );
   }
 
-  public getById(id: number): Observable<T> {
+  public getById(id: string | number): Observable<T> {
     return this.http.get<T>(`${this.fullUrl}/${id}`);
   }
 

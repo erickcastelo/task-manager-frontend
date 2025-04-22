@@ -114,16 +114,21 @@ export class LoginPageComponent implements OnInit {
   }
 
   private login(auth: Auth) {
-    this.authService.login(auth).subscribe({
-      next: (token) => {
-        if (token) {
-          this.cookieService.set('token', token);
-          this.router.navigate(['task/list']);
-        }
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
+    this.authService
+      .login({
+        ...auth,
+        password: encodeURIComponent(auth.password),
+      })
+      .subscribe({
+        next: (token) => {
+          if (token) {
+            this.cookieService.set('token', token);
+            this.router.navigate(['task/list']);
+          }
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
   }
 }

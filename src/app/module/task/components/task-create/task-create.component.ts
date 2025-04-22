@@ -63,7 +63,7 @@ export class TaskCreateComponent implements OnInit {
   }
 
   public getById(): void {
-    this.taskService.getById(Number(this.taskId)).subscribe({
+    this.taskService.getById(this.taskId + '').subscribe({
       next: (task: Task) => {
         this.taskForm = this.formBuilder.group({
           title: [task.title, null],
